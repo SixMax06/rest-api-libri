@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import Libro from './Libro'
 
 const rest_api_url = "http://localhost:11000/api/libri"
 
@@ -22,7 +23,7 @@ const makePOST_libro = async(libro) => {
 }
 
 const makeDELETE_libro = async(id_libro) => {
-  if (id_libro) {
+  if (id_libro !== undefined) {
     const response = await fetch(rest_api_url + '/' + id_libro, {
       method: 'DELETE'
     })
@@ -77,26 +78,19 @@ function App() {
   return (
     <>
       {/*Form di input*/}
-      <form>
+      <div>
         <input type="text" placeholder='Titolo' value={titolo} onChange={(event) => setTitolo(event.target.value)}/>
         <input type="text" placeholder='Autore' value={autore} onChange={(event) => setAutore(event.target.value)}/>
         <input type="text" placeholder='Genere' value={genere} onChange={(event) => setGenere(event.target.value)}/>
         <input type="text" placeholder='Anno di pubblicazione' value={annoPubblicazione} onChange={(event) => setAnnoPubblicazione(event.target.value)}/>
         <button type="button" onClick={handleCerca}>Cerca</button>
         <button type="button" onClick={handleAggiungi}>Aggiungi</button>
-      </form>
+      </div>
 
       {/*Elenco libri*/}
       <div>
         {data.map((libro) => (
-          libro && libro.id &&
-          <div key={libro.id}>
-            <h2>{libro.titolo}</h2>
-            <p>{libro.autore}</p>
-            <p>{libro.genere}</p>
-            <p>{libro.anno_pubblicazione}</p>
-            <button onClick={() => handleRimuovi(libro.id)}>Rimuovi</button>
-          </div>
+          <Libro key={libro.id} libro={libro} handleRimuovi={handleRimuovi} />
         ))}
       </div>
     </>

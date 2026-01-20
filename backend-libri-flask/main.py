@@ -61,7 +61,7 @@ def delete_libro(libro_id):
             break
     
     if not found:
-        return jsonify({"error": "Libro non trovato"}), 400
+        return jsonify({"error": "Libro non trovato"}), 404
         
     return jsonify({"msg": "Libro eliminato"}), 200
 
