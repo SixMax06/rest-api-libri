@@ -32,6 +32,12 @@ const makeDELETE_libro = async(id_libro) => {
   }
 }
 
+const makeDELETE_libreria = async() => {
+  const response = await fetch(rest_api_url , {method: 'DELETE'})
+  await response.json()
+  return response
+}
+
 function App() {
   const [data, setData] = useState([])
   const [titolo, setTitolo] = useState('')
@@ -75,6 +81,12 @@ function App() {
     })
   }
 
+  const handleEliminaLibreria = () => {
+    makeDELETE_libreria().then(() => {
+      makeGET_libri().then((data) => setData(data))
+    })
+  }
+
   return (
     <>
       {/*Form di input*/}
@@ -85,6 +97,7 @@ function App() {
         <input type="text" placeholder='Anno di pubblicazione' value={annoPubblicazione} onChange={(event) => setAnnoPubblicazione(event.target.value)}/>
         <button type="button" onClick={handleCerca}>Cerca</button>
         <button type="button" onClick={handleAggiungi}>Aggiungi</button>
+        <button type="button" onClick={handleEliminaLibreria}>Elimina Libreria</button>
       </div>
 
       {/*Elenco libri*/}
