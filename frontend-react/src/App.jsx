@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import Libro from './Libro'
+import Libro from './components/Libro'
 
 const rest_api_url = "http://localhost:11000/api/libri"
 
@@ -90,18 +90,26 @@ function App() {
   return (
     <>
       {/*Form di input*/}
-      <div>
-        <input type="text" placeholder='Titolo' value={titolo} onChange={(event) => setTitolo(event.target.value)}/>
-        <input type="text" placeholder='Autore' value={autore} onChange={(event) => setAutore(event.target.value)}/>
-        <input type="text" placeholder='Genere' value={genere} onChange={(event) => setGenere(event.target.value)}/>
-        <input type="text" placeholder='Anno di pubblicazione' value={annoPubblicazione} onChange={(event) => setAnnoPubblicazione(event.target.value)}/>
-        <button type="button" onClick={handleCerca}>Cerca</button>
-        <button type="button" onClick={handleAggiungi}>Aggiungi</button>
-        <button type="button" onClick={handleEliminaLibreria}>Elimina Libreria</button>
-      </div>
+      <nav className='input-bar'>
+        <div className='input-content'>
+          <input type="text" className='input' placeholder='Titolo' value={titolo} onChange={(event) => setTitolo(event.target.value)}/>
+          <input type="text" className='input' placeholder='Autore' value={autore} onChange={(event) => setAutore(event.target.value)}/>
+          <input type="text" className='input' placeholder='Genere' value={genere} onChange={(event) => setGenere(event.target.value)}/>
+          <input type="text" className='input' placeholder='Anno di pubblicazione' value={annoPubblicazione} onChange={(event) => setAnnoPubblicazione(event.target.value)}/>
+        </div>
+
+        <div className="input-content">
+          <button type="button" className='btn btn-primary' onClick={handleCerca}>Cerca</button>
+          <button type="button" className='btn btn-success' onClick={handleAggiungi}>Aggiungi</button>
+          <button type="button" className='btn btn-error' onClick={handleEliminaLibreria}>Elimina Libreria</button>
+        </div>
+      </nav>
+
+      {/*Spaziatore*/}
+      <div className='spacer'></div>
 
       {/*Elenco libri*/}
-      <div>
+      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lista-libri'>
         {data.map((libro) => (
           <Libro key={libro.id} libro={libro} handleRimuovi={handleRimuovi} />
         ))}
