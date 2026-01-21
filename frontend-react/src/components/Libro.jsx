@@ -1,6 +1,6 @@
 const Libro = ({ libro, handleRimuovi }) => {
     return (
-        <div className="card card-border bg-base-100 w-96">
+        <div className="card card-border bg-base-300 w-96 libro" >
             <div className="card-body">
                 <h2 className="card-title">{libro.titolo}</h2>
                 <p>di {libro.autore} ({libro.anno_pubblicazione})</p>
